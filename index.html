@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Program</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main-menu" class="menu-container">
+        <h1>Dance Program</h1>
+        <button id="collect-data-btn">Collect Dance Moves</button>
+        <button id="train-model-btn">Train Model</button>
+        <button id="play-game-btn">Dance!</button>
+    </div>
+
+    <div id="collect-data-section" class="game-section hidden">
+        <h2>Collect Dance Moves</h2>
+        <div id="pose-selection">
+            <p>Choose 3 dance moves to record:</p>
+            <div id="selected-moves-display"></div>
+            <button id="add-move-btn">Add New Move</button>
+        </div>
+        <div id="recording-area">
+            <video id="webcam" width="640" height="480" autoplay muted></video>
+            <canvas id="output-canvas" width="640" height="480"></canvas>
+            <div id="countdown"></div>
+            <button id="start-recording-btn" disabled>Start Recording</button>
+            <button id="stop-recording-btn" disabled>Stop Recording</button>
+        </div>
+        <button id="back-to-menu-from-collect">Back to Menu</button>
+    </div>
+
+    <div id="train-model-section" class="game-section hidden">
+        <h2>Train Your Dance Model</h2>
+        <p>Click the button below to train your model with the collected data.</p>
+        <button id="start-training-btn">Train Model Now</button>
+        <p id="training-status"></p>
+        <button id="back-to-menu-from-train">Back to Menu</button>
+    </div>
+
+    <div id="game-section" class="game-section hidden">
+        <h2>Dance Game!</h2>
+        <div id="game-display">
+            <div id="target-pose-display">
+                <h3>Match this pose:</h3>
+                <canvas id="target-pose-canvas" width="300" height="300"></canvas>
+            </div>
+            <div id="player-pose-display">
+                <h3>Your pose:</h3>
+                <video id="game-webcam" width="640" height="480" autoplay muted></video>
+                <canvas id="game-output-canvas" width="640" height="480"></canvas>
+            </div>
+            <p id="game-feedback"></p>
+        </div>
+        <button id="start-game-btn">Start Game</button>
+        <button id="back-to-menu-from-game">Back to Menu</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+    <script src="collect_data.js"></script>
+    <script src="train_model.js"></script>
+    <script src="game.js"></script>
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('collect-data-btn').addEventListener('click', () => showSection('collect-data-section'));
+        document.getElementById('train-model-btn').addEventListener('click', () => showSection('train-model-section'));
+        document.getElementById('play-game-btn').addEventListener('click', () => showSection('game-section'));
+
+        document.getElementById('back-to-menu-from-collect').addEventListener('click', () => showSection('main-menu'));
+        document.getElementById('back-to-menu-from-train').addEventListener('click', () => showSection('main-menu'));
+        document.getElementById('back-to-menu-from-game').addEventListener('click', () => showSection('main-menu'));
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.game-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById(sectionId).classList.remove('hidden');
+            if (sectionId === 'main-menu') {
+                document.getElementById('main-menu').classList.remove('hidden');
+            }
+        }
+        showSection('main-menu'); // Show main menu on load
+    </script>
+</body>
+</html>
