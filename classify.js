@@ -51,9 +51,9 @@ function drawClassification() {
     let predicted = classifyCurrentPose();
     if (predicted) {
       fill(0, 0, 255);
-      textSize(32);
-      textAlign(CENTER, CENTER);
-      text(`Prediction: ${predicted}`, width / 2, height - 200);
+      textSize(20);
+      textAlign(LEFT, TOP);
+      text(`Prediction: ${predicted}`, 20, 20);
     }
   }
 }
