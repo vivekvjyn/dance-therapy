@@ -14,12 +14,6 @@ function setup() {
     loadPosenet();
   };
 
-  // Add a button to save pose
-  // let btn = createButton('Save Pose');
-  // btn.position(10, height + 10);
-  // btn.mousePressed(startPoseCountdown);
-
-
   setupPoseUI();
   setupTrainUI();
   setupClassifierUI();
@@ -51,12 +45,8 @@ function draw() {
   drawClassification();
 
   let names = Object.keys(savedPoses);
-  // for (let i = 0; i < names.length; i++) {
-  //   console.log(("x" + (20 + i * 120) + " y" + 500 + " name: " + names[i]));
-  //   drawPoseThumbnail(names[i], 20 + i * 120, 500, 100);
-  // }
 
-  let thumbnailY = height - 140; // 10px margin from bottom
+  let thumbnailY = height - 140;
   for (let i = 0; i < names.length; i++) {
     drawPoseThumbnail(names[i], 20 + i * 120, thumbnailY, 100);
   }
@@ -84,19 +74,3 @@ async function detectPose() {
     await new Promise(r => setTimeout(r, 30)); // ~30 FPS
   }
 }
-
-// function startPoseCountdown() {
-//   if (!savingPose) {
-//     savingPose = true;
-//     countdownStartTime = millis();
-//   }
-// }
-
-// function saveCurrentPose() {
-//   if (pose) {
-//     // Deep copy the pose keypoints
-//     let poseCopy = JSON.parse(JSON.stringify(pose));
-//     savedPoses.push(poseCopy);
-//     console.log('Pose saved:', poseCopy);
-//   }
-// }

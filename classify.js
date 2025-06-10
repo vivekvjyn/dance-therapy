@@ -12,14 +12,6 @@ async function loadClassifier() {
   }
 }
 
-// Call this after setup or after training
-// loadClassifier();
-
-// function extractFeatures(pose) {
-//   // Must match your training feature extraction!
-//   return pose.keypoints.flatMap(kp => [kp.position.x, kp.position.y]);
-// }
-
 function classifyCurrentPose() {
   if (!classifierModel || !pose) return null;
   const features = extractFeatures(pose);
@@ -52,8 +44,6 @@ function setupClassifierUI() {
     });
   });
 }
-
-
 
 function drawClassification() {
   if (!pose || !classifierModel) return;

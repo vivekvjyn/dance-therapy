@@ -7,11 +7,6 @@ async function loadPoseData() {
     return JSON.parse(data);
 }
 
-// function extractFeatures(pose) {
-//     // Flatten all keypoints' x and y into a single array
-//     return pose.keypoints.flatMap(kp => [kp.position.x, kp.position.y]);
-// }
-
 function prepareDataset(savedPoses) {
     const X = [];
     const y = [];
@@ -66,21 +61,9 @@ async function trainClassifier() {
     alert('Training complete! Model saved.');
 }
 
-// function setupTrainUI() {
-//     const btn = createButton('Train Pose Classifier');
-//     btn.position(10, 10);
-//     btn.mousePressed(() => {
-//       console.log('Train Pose Classifier button pressed');
-//       trainClassifier();
-//   });
-// }
-
 function setupTrainUI() {
   controlsDiv = select('#controls');
   const btn = createButton('Train Pose Classifier');
   btn.parent(controlsDiv);
   btn.mousePressed(() => trainClassifier());
 }
-
-// Call this function from a button or console to train
-// trainClassifier();

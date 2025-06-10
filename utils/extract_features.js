@@ -24,3 +24,8 @@ function extractFeatures(pose) {
         (kp.position.y - centerY) / scale
     ]);
 }
+
+// old method
+// function extractFeatures(pose) {
+//   return pose.keypoints.flatMap(kp => [kp.position.x, kp.position.y]);
+// }

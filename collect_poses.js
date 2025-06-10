@@ -1,41 +1,3 @@
-// let savedPoses = [];
-// let savingPose = false;
-// let countdownStartTime = 0;
-// let countdownDuration = 3; // seconds
-
-// function startPoseCountdown() {
-//   if (!savingPose) {
-//     savingPose = true;
-//     countdownStartTime = millis();
-//   }
-// }
-
-// function saveCurrentPose() {
-//   if (pose) {
-//     let poseCopy = JSON.parse(JSON.stringify(pose));
-//     savedPoses.push(poseCopy);
-//     console.log('Pose saved:', poseCopy);
-//   }
-// }
-
-// function drawCountdown() {
-//   if (savingPose) {
-//     let elapsed = (millis() - countdownStartTime) / 1000; // Convert to seconds
-//     let remaining = countdownDuration - elapsed;
-
-//     if (remaining <= 0) {
-//       saveCurrentPose();
-//       savingPose = false;
-//       console.log('Pose saved after countdown:', savedPoses[savedPoses.length - 1]);
-//     } else {
-//       fill(255, 0, 0);
-//       textSize(32);
-//       textAlign(CENTER, CENTER);
-//       text(`Saving pose in ${Math.ceil(remaining)}...`, width / 2, height / 2);
-//     }
-//   }
-// }
-
 let savedPoses = {}; // { poseName: [samples] }
 let savingPose = false;
 let countdownStartTime = 0;
@@ -45,21 +7,6 @@ let samplesPerSecond = 15;
 let currentPoseName = '';
 let samples = [];
 let recordingStartTime = 0;
-
-// function setupPoseUI() {
-//   // Create input and button in p5.js
-//   let input = createInput('');
-//   input.attribute('placeholder', 'Pose name');
-//   input.position(8, height+90);
-//   input.id('poseNameInput');
-
-//   let btn = createButton('Record Pose');
-//   btn.position(180, height+90);
-//   btn.mousePressed(() => {
-//     // console.log('Record Pose button pressed');
-//     startPoseCountdown();
-//   });
-// }
 
 function setupPoseUI() {
   controlsDiv = select('#controls');
@@ -78,16 +25,6 @@ function setupPoseUI() {
     if (confirm('Are you sure you want to clear all saved poses and classifier?')) {
       // empty localStorage fully
       localStorage.clear();
-      // localStorage.removeItem('savedPoses');
-      // localStorage.removeItem('poseClassifierLabels');
-      // localStorage.removeItem('tensorflowjs_models/pose-classifier/info');
-      // localStorage.removeItem('tensorflowjs_models/pose-classifier/model_topology');
-      // localStorage.removeItem('tensorflowjs_models/pose-classifier/weight_data');
-      // localStorage.removeItem('tensorflowjs_models/pose-classifier/weight_specs');
-      // savedPoses = {};
-      // localStorage.removeItem('savedPoses');
-      // local
-      // console.log('All saved poses cleared.');
     }
   });
 
