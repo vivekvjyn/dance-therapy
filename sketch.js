@@ -36,20 +36,15 @@ function draw() {
   }
 
   if (pose) {
-    drawKeypoints(pose.keypoints, 0.5, color(0, 255, 0)); // Draw keypoints in green
-    drawSkeleton(pose.keypoints, 0.5, color(255, 0, 0)); // Draw skeleton in red
+    drawKeypoints(pose.keypoints, 0.5, color(120, 200, 255)); // Draw keypoints in green
+    drawSkeleton(pose.keypoints, 0.5, color(255, 120, 120)); // Draw skeleton in red
   }
 
   drawCountdown();
 
   drawClassification();
 
-  let names = Object.keys(savedPoses);
-
-  let thumbnailY = height - 140;
-  for (let i = 0; i < names.length; i++) {
-    drawPoseThumbnail(names[i], 20 + i * 120, thumbnailY, 100);
-  }
+  drawAllPoseThumbnails();
 }
 
 async function loadPosenet() {

@@ -25,6 +25,7 @@ function setupPoseUI() {
     if (confirm('Are you sure you want to clear all saved poses and classifier?')) {
       // empty localStorage fully
       localStorage.clear();
+      savedPoses = {}; // clear saved poses so the display of thumbnails is empty
     }
   });
 

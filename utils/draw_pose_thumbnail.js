@@ -59,3 +59,13 @@ function drawPoseThumbnail(poseName, x, y, size = 100) {
   textAlign(CENTER, TOP);
   text(poseName, x + size / 2, y + size + 4);
 }
+
+function drawAllPoseThumbnails () {
+  let names = Object.keys(savedPoses);
+  
+  let thumbnailY = height - 140;
+  for (let i = 0; i < names.length; i++) {
+    drawPoseThumbnail(names[i], 20 + i * 120, thumbnailY, 100);
+  }
+}
+
