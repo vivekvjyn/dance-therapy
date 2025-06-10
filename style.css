@@ -1,105 +1,84 @@
 body {
-    font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    margin: 0;
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  color: #fff;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
-.menu-container, .game-section {
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%;
-    max-width: 800px;
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 24px;
+  letter-spacing: 2px;
+  color: #ff5e62;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.menu-container button,
-.game-section button {
-    display: block;
-    width: 80%;
-    padding: 15px;
-    margin: 15px auto;
-    font-size: 1.2em;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s ease;
+canvas {
+  display: block;
+  margin: 32px auto 0 auto;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  border: 2px solid #ff9966;
 }
 
-.menu-container button:hover,
-.game-section button:hover:not(:disabled) {
-    background-color: #0056b3;
+input[type="text"], input, button {
+  font-size: 1.1rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  margin: 8px 4px;
+  outline: none;
+  transition: box-shadow 0.2s;
 }
 
-.menu-container button:disabled,
-.game-section button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
+input[type="text"], input {
+  background: #2d2d2d;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.game-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+input[type="text"]:focus, input:focus {
+  box-shadow: 0 0 0 2px #ff9966;
 }
 
-.hidden {
-    display: none !important;
+button {
+  background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: background 0.2s, transform 0.1s;
 }
 
-#recording-area, #game-display {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+button:hover, button:focus {
+  background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
+  transform: translateY(-2px) scale(1.04);
 }
 
-#output-canvas, #game-output-canvas, #target-pose-canvas {
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    background-color: #eee;
+#poseNameInput {
+  width: 180px;
 }
 
-#countdown {
-    font-size: 3em;
-    font-weight: bold;
-    color: #dc3545;
-    margin-top: 10px;
+@media (max-width: 700px) {
+  canvas {
+    width: 98vw !important;
+    height: auto !important;
+    margin-top: 12px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
 }
 
-#pose-selection {
-    margin-bottom: 20px;
-}
-
-#selected-moves-display {
-    border: 1px dashed #ccc;
-    padding: 10px;
-    min-height: 50px;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-
-.move-tag {
-    display: inline-block;
-    background-color: #e9ecef;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-#target-pose-display, #player-pose-display {
-    text-align: center;
-}
-
-#target-pose-canvas {
-    background-color: #f8f9fa;
-    border: 2px solid #007bff;
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 0 auto;
+  max-width: 800px;
 }
