@@ -133,65 +133,75 @@ function checkPoseAtBeat() {
   }
 }
 
-// function drawUpcomingPoses() {
-//   if (!gameActive || !currentSong || !currentBeats.length) return;
-
-//   const now = currentSong.currentTime();
-//   let displayCount = 0;
-//   let shown = 0;
-//   for (let i = nextPoseIndex; i < poseSequence.length && shown < 3; i++) {
-//     const beatTime = currentBeats[i];
-//     const timeToBeat = beatTime - now;
-//     const midY = height / 2;
-//     const speed = 200; // pixels per second
-//     // const y = midY + timeToBeat * speed;
-//     const y = midY - timeToBeat * speed;
-//     if (poseSequence[i]) {
-//       drawPoseThumbnail(poseSequence[i], width / 2 - 50, y - 50, 100);
-//       shown++;
-//     }
-//   }
-// }
-
 function drawUpcomingPoses() {
   if (!gameActive || !currentSong || !currentBeats.length) return;
 
   const now = currentSong.currentTime();
-  let shown = 0;
-  for (let i = nextPoseIndex; i < poseSequence.length && shown < 3; i++) {
+  const midY = height / 2;
+  const speed = 100; // pixels per second
+
+  // Show a window of poses before and after the current one
+  const windowSize = 6; // 3 above, 3 below
+  const start = Math.max(0, nextPoseIndex - 3);
+  const end = Math.min(poseSequence.length, nextPoseIndex + 3);
+
+  for (let i = start; i < end; i++) {
     const beatTime = currentBeats[i];
     const timeToBeat = beatTime - now;
-    const midY = height / 2;
-    const speed = 100; // pixels per second
     const y = midY - timeToBeat * speed;
 
     if (poseSequence[i]) {
       let poseName = poseSequence[i];
-      let isCurrentBeat = Math.abs(beatTime - now) < 0.4;
+      let isCurrentBeat = Math.abs(beatTime - now) < 0.25;
+      let wasCorrect = results[i] === true;
+      let wasIncorrect = results[i] === false;
+
       push();
       textAlign(CENTER, CENTER);
       if (isCurrentBeat) {
         textSize(64);
         stroke(0);
         strokeWeight(8);
-        fill(255, 100, 100); // Highlight color
+        if (wasCorrect) {
+          fill(30, 200, 60);
+        } else if (wasIncorrect) {
+          fill(255, 100, 100);
+        } else {
+          fill(255, 255, 100);
+        }
         text(poseName, width / 2, y);
-        // Draw again with no stroke for a solid fill
         noStroke();
-        fill(255, 100, 100);
+        if (wasCorrect) {
+          fill(30, 200, 60);
+        } else if (wasIncorrect) {
+          fill(255, 100, 100);
+        } else {
+          fill(255, 255, 100);
+        }
         text(poseName, width / 2, y);
-      } else {
+      } else if (beatTime < now) {
+        // Past poses: show smaller, colored by result
         textSize(32);
         noStroke();
-        fill(255);
+        if (wasCorrect) {
+          fill(30, 200, 60, 180);
+        } else if (wasIncorrect) {
+          fill(255, 100, 100, 180);
+        } else {
+          fill(180);
+        }
+        text(poseName, width / 2, y);
+      } else {
+        // Future poses
+        textSize(32);
+        noStroke();
+        fill(255, 255, 255, 180);
         text(poseName, width / 2, y);
       }
       pop();
-      shown++;
     }
   }
 }
-
 
 function drawScore() {
   if (!gameActive) return;
