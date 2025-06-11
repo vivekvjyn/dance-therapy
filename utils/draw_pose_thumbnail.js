@@ -62,8 +62,14 @@ function drawPoseThumbnail(poseName, x, y, size = 100) {
 
 function drawAllPoseThumbnails () {
   let names = Object.keys(savedPoses);
-  
-  let thumbnailY = height - 140;
+
+  // Draw header above thumbnails
+  fill(0);
+  textSize(20);
+  textAlign(LEFT, BOTTOM);
+  text("Recorded Poses:", 20, height - 135);
+
+  let thumbnailY = height - 125;
   for (let i = 0; i < names.length; i++) {
     drawPoseThumbnail(names[i], 20 + i * 120, thumbnailY, 100);
   }

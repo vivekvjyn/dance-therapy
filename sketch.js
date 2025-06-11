@@ -21,7 +21,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(200);
   // Mirror the video
   push();
   translate(width, 0);
