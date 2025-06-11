@@ -17,6 +17,7 @@ function setup() {
   setupPoseUI();
   setupTrainUI();
   setupClassifierUI();
+  setupSongSelectionUI();
 }
 
 function draw() {
@@ -45,6 +46,12 @@ function draw() {
   drawClassification();
 
   drawAllPoseThumbnails();
+
+  if (gameActive) {
+    checkPoseAtBeat();
+    drawUpcomingPoses();
+    drawScore();
+  }
 }
 
 async function loadPosenet() {

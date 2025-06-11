@@ -27,21 +27,29 @@ function classifyCurrentPose() {
 function setupClassifierUI() {
   controlsDiv = select('#controls');
   const btn = createButton('Run Classifier');
+  //set button id
+  btn.id('runClassifierBtn');
   btn.parent(controlsDiv);
-  btn.mousePressed(() => { 
-    loadClassifier().then(() => {
-      console.log('Classifier ready. Classifying current pose...');
-      //flip the state to draw classification
-      if (drawClassificationState) {
-        drawClassificationState = false;
-        btn.html('Run Classifier');
-      } else {
-        drawClassificationState = true;
-        btn.html('Stop Classifier');
-      }
-    }).catch(err => {
-      console.error('Error loading classifier:', err);
-    });
+  btn.mousePressed(loadAndRunClassifier);
+}
+
+async function loadAndRunClassifier() { 
+  loadClassifier().then(() => {
+    console.log('Classifier ready. Classifying current pose...');
+    //flip the state to draw classification
+    if (drawClassificationState) {
+      drawClassificationState = false;
+      // btn.html('Run Classifier');
+      // set runButtonIdclassifer to Run Classifier
+      select('#runClassifierBtn').html('Run Classifier');
+    } else {
+      drawClassificationState = true;
+      // btn.html('Stop Classifier');
+      select('#runClassifierBtn').html('Stop Classifier');
+
+    }
+  }).catch(err => {
+    console.error('Error loading classifier:', err);
   });
 }
 
