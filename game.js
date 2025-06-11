@@ -205,11 +205,12 @@ function drawUpcomingPoses() {
 
 function drawScore() {
   if (!gameActive) return;
-  push();
-  textAlign(RIGHT, TOP);
-  textSize(20);
-  fill(30, 200, 60);
-  // noStroke();
-  text(`Score: ${score} / ${totalPoses}`, width - 20, 20);
-  pop();
+  const scoreText = `Score: ${score} / ${totalPoses}`;
+  drawTextBox({
+    textStr: scoreText,
+    x: width - 20,
+    y: 20,
+    align: 'right',
+    textColor: [25],
+  });
 }

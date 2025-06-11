@@ -14,7 +14,12 @@ function drawPoseThumbnail(poseName, x, y, size = 100) {
 
   // Create a graphics buffer for the thumbnail
   let pg = createGraphics(size, size);
-  pg.background(40, 40, 40, 220);
+
+  // Draw rounded background on the buffer
+  pg.noStroke();
+  pg.fill(40, 40, 40, 220);
+  pg.rect(0, 0, size, size, 20); // 20px corner radius
+
   pg.push();
   // Find bounds for normalization
   let xs = poseSample.keypoints.map(kp => kp.position.x);
@@ -54,7 +59,7 @@ function drawPoseThumbnail(poseName, x, y, size = 100) {
   image(pg, x, y);
 
   // Draw the pose name underneath
-  fill(255);
+  fill(25);
   textSize(16);
   textAlign(CENTER, TOP);
   text(poseName, x + size / 2, y + size + 4);
@@ -63,11 +68,16 @@ function drawPoseThumbnail(poseName, x, y, size = 100) {
 function drawAllPoseThumbnails () {
   let names = Object.keys(savedPoses);
 
+  // draw  a grey rect at the bottom of the canvas
+  noStroke();
+  fill(40, 40, 40, 220);
+  rect(0, height - 160, width, 28, 1, 1, 2, 2);
+
   // Draw header above thumbnails
-  fill(0);
+  fill(220);
   textSize(20);
   textAlign(LEFT, BOTTOM);
-  text("Recorded Poses:", 20, height - 135);
+  text("Recorded Poses:", 10, height - 135);
 
   let thumbnailY = height - 125;
   for (let i = 0; i < names.length; i++) {

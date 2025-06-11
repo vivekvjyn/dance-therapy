@@ -55,16 +55,18 @@ async function loadAndRunClassifier() {
     console.error('Error loading classifier:', err);
   });
 }
-
 function drawClassification() {
   if (!pose || !classifierModel) return;
   if (drawClassificationState){
     let predicted = classifyCurrentPose();
     if (predicted) {
-      fill(0, 0, 255);
-      textSize(20);
-      textAlign(LEFT, TOP);
-      text(`Prediction: ${predicted}`, 20, 20);
+      drawTextBox({
+        textStr: `Prediction: ${predicted}`,
+        x: 20,
+        y: 20,
+        align: 'left',
+        textColor: [25]
+      });
     }
   }
 }
