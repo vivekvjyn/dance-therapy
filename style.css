@@ -82,3 +82,30 @@ button:hover, button:focus {
   margin: 24px auto 0 auto;
   max-width: 800px;
 }
+select {
+  font-size: 1.1rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  margin: 8px 4px;
+  outline: none;
+  background: #2d2d2d;
+  color: #bbb; /* Grey text like placeholder */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select:focus {
+  box-shadow: 0 0 0 2px #ff9966;
+}
+
+/* Custom arrow remains the same */
+select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg width='16' height='16' fill='white' xmlns='http://www.w3.org/2000/svg'><path d='M4 6l4 4 4-4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px 18px;
+  padding-right: 38px;
+}

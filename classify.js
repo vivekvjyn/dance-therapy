@@ -41,11 +41,14 @@ async function loadAndRunClassifier() {
       drawClassificationState = false;
       // btn.html('Run Classifier');
       // set runButtonIdclassifer to Run Classifier
-      select('#runClassifierBtn').html('Run Classifier');
+      // if runClassifierBtn exists
+      if (select('#runClassifierBtn')) 
+        select('#runClassifierBtn').html('Run Classifier');
     } else {
       drawClassificationState = true;
       // btn.html('Stop Classifier');
-      select('#runClassifierBtn').html('Stop Classifier');
+     if (select('#runClassifierBtn')) 
+        select('#runClassifierBtn').html('Stop Classifier');
 
     }
   }).catch(err => {

@@ -18,7 +18,7 @@ function assignPosesToBeats(songPath) {
   const filename = songPath.split('/').pop();
   // Use every 4th beat
   const allBeats = beatsData[filename] || [];
-  currentBeats = allBeats.filter((_, i) => i % 4 === 0);
+  currentBeats = allBeats.filter((_, i) => i % 2 === 0);
   poseSequence = currentBeats.map(() => selectRandomPose());
   nextPoseIndex = 0;
   score = 0;
@@ -133,33 +133,73 @@ function checkPoseAtBeat() {
   }
 }
 
+// function drawUpcomingPoses() {
+//   if (!gameActive || !currentSong || !currentBeats.length) return;
+
+//   const now = currentSong.currentTime();
+//   let displayCount = 0;
+//   let shown = 0;
+//   for (let i = nextPoseIndex; i < poseSequence.length && shown < 3; i++) {
+//     const beatTime = currentBeats[i];
+//     const timeToBeat = beatTime - now;
+//     const midY = height / 2;
+//     const speed = 200; // pixels per second
+//     // const y = midY + timeToBeat * speed;
+//     const y = midY - timeToBeat * speed;
+//     if (poseSequence[i]) {
+//       drawPoseThumbnail(poseSequence[i], width / 2 - 50, y - 50, 100);
+//       shown++;
+//     }
+//   }
+// }
+
 function drawUpcomingPoses() {
   if (!gameActive || !currentSong || !currentBeats.length) return;
 
   const now = currentSong.currentTime();
-  let displayCount = 0;
   let shown = 0;
   for (let i = nextPoseIndex; i < poseSequence.length && shown < 3; i++) {
     const beatTime = currentBeats[i];
     const timeToBeat = beatTime - now;
     const midY = height / 2;
-    const speed = 200; // pixels per second
-    // const y = midY + timeToBeat * speed;
+    const speed = 100; // pixels per second
     const y = midY - timeToBeat * speed;
+
     if (poseSequence[i]) {
-      drawPoseThumbnail(poseSequence[i], width / 2 - 50, y - 50, 100);
+      let poseName = poseSequence[i];
+      let isCurrentBeat = Math.abs(beatTime - now) < 0.4;
+      push();
+      textAlign(CENTER, CENTER);
+      if (isCurrentBeat) {
+        textSize(64);
+        stroke(0);
+        strokeWeight(8);
+        fill(255, 100, 100); // Highlight color
+        text(poseName, width / 2, y);
+        // Draw again with no stroke for a solid fill
+        noStroke();
+        fill(255, 100, 100);
+        text(poseName, width / 2, y);
+      } else {
+        textSize(32);
+        noStroke();
+        fill(255);
+        text(poseName, width / 2, y);
+      }
+      pop();
       shown++;
     }
   }
 }
 
+
 function drawScore() {
   if (!gameActive) return;
   push();
   textAlign(RIGHT, TOP);
-  textSize(32);
+  textSize(20);
   fill(30, 200, 60);
-  noStroke();
+  // noStroke();
   text(`Score: ${score} / ${totalPoses}`, width - 20, 20);
   pop();
 }

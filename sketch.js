@@ -16,7 +16,7 @@ function setup() {
 
   setupPoseUI();
   setupTrainUI();
-  setupClassifierUI();
+  // setupClassifierUI(); // we trigger the classifier directly for the game, this can be used for debugging
   setupSongSelectionUI();
 }
 
