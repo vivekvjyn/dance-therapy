@@ -19,6 +19,7 @@
 <body>
     <h1>Dance Therapy</h1>
     <div id="controls"></div>
+    <div id="canvas-container"></div>
     <script src="utils/draw_text_box.js"></script>
     <script src="utils/draw_pose_utils.js"></script>
     <script src="utils/draw_pose_thumbnail.js"></script>
@@ -28,5 +29,46 @@
     <script src="classify.js"></script>
     <script src="game.js"></script>
     <script src="sketch.js"></script>
+
+<!-- ...existing code... -->
+    <script src="utils/draw_text_box.js"></script>
+    <script src="utils/draw_pose_utils.js"></script>
+    <script src="utils/draw_pose_thumbnail.js"></script>
+    <script src="utils/extract_features.js"></script>
+    <script src="collect_poses.js"></script>
+    <script src="train.js"></script>
+    <script src="classify.js"></script>
+    <script src="game.js"></script>
+    <script src="sketch.js"></script>
+
+    <!-- Instructions section below the canvas -->
+    <div id="instructions-section">
+        <div id="instructions-header">
+            <span id="arrow">&#9654;</span>
+            <span style="margin-left: 0.5em;">Instructions</span>
+        </div>
+        <div id="instructions-content">
+            <ol>
+                <li><strong>Record Poses:</strong> Use the controls to record different poses for each dance move. Make sure you have good lighting and are visible to the camera.</li>
+                <li><strong>Train Model:</strong> Once you have recorded enough samples for each pose, click the "Train" button to train your pose classifier.</li>
+                <li><strong>Choose a Song:</strong> Select a song from the available options to play during the game.</li>
+                <li><strong>Play the Game:</strong> Follow the on-screen prompts and perform the poses as they appear. Try to match the poses to score points!</li>
+            </ol>
+        </div>
+    </div>
+    <script>
+        const header = document.getElementById('instructions-header');
+        const content = document.getElementById('instructions-content');
+        const arrow = document.getElementById('arrow');
+        header.addEventListener('click', () => {
+            const isOpen = content.style.display === 'block';
+            content.style.display = isOpen ? 'none' : 'block';
+            arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+            if (!isOpen) {
+                // Scroll to the instructions section when opening
+                document.getElementById('instructions-section').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
 </body>
 </html>

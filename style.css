@@ -109,3 +109,31 @@ select {
   background-size: 18px 18px;
   padding-right: 38px;
 }
+
+#instructions-section {
+  margin: 2em auto;
+  max-width: 600px;
+}
+
+#instructions-header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  user-select: none;
+}
+
+#arrow {
+  transition: transform 0.2s;
+}
+
+#instructions-content {
+  display: none;
+  margin-top: 1em;
+  background: #35373a;
+  border-radius: 8px;
+  padding: 1em;
+  border: 1px solid #444;
+  color: #eee;
+}
