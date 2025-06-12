@@ -57,8 +57,11 @@ function setupSongSelectionUI() {
   controlsDiv = select('#controls');
   songSelect = createSelect();
   songSelect.option('Select a song');
-  availableSongs.forEach(song => {
-    songSelect.option(song);
+  availableSongs.forEach(songPath => {
+    // Extract just the song name for display, omitting .mp3
+    let songName = songPath.split('/').pop();
+    songName = songName.replace(/\.mp3$/i, ''); // Remove .mp3 extension
+    songSelect.option(songName, songPath); // label, value
   });
   songSelect.parent(controlsDiv);
 
