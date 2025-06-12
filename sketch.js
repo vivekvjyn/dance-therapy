@@ -3,7 +3,8 @@ let pose;
 let posenetModel;
 
 function setup() {
-  createCanvas(640, 640);
+  let cnv = createCanvas(640, 640);
+  cnv.parent('canvas-container'); // <-- Add this line
   video = createCapture(VIDEO);
   video.size(width, height-160);
   video.hide();
